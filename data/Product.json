@@ -1,0 +1,29 @@
+{
+  "id": "SR0160AQ",
+  "title": "Classic Aquamarine and Diamond Three Stone Engagement Ring",
+  "base_price": 237589,
+  "exclusive_offer": "Get 20% off on making charges",
+  "reviews": 7,
+  "images": [
+    "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
+    "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png",
+    "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png",
+    "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_t.png"
+  ],
+
+  "variations": {
+    "gemstone": ["Aquamarine", "Diamond", "Sapphire"],
+    "quality": ["Good", "Better", "Best", "Heirloom"],
+    "metal": ["White Gold", "Yellow Gold", "Rose Gold"],
+    "carat_weight": [1.5, 1.8, 2.0],
+    "ring_size": [6, 7, 8, 9, 10]
+  },
+  "price_breakdown": {
+    "metal": { "rate": 4567, "weight": 3.87, "value": 18528 },
+    "stones": [
+      { "type": "Aquamarine", "carat": 1.12, "value": 62748 },
+      { "type": "Diamond", "carat": 0.46, "value": 143175 }
+    ],
+    "making_charges": 6218
+  }
+}
