@@ -5,6 +5,7 @@ import PriceBreakdown from "./PriceBreakdown";
 import AddToBagButton from "./AddToBagButton";
 import { calculateUnifiedPricing } from "@/lib/pricing";
 import { checkAvailability } from "@/lib/availability";
+import ProductImageGallery from "./ProductGallery";
 
 export default function ProductInfo({ product }: { product: any }) {
   const [selected, setSelected] = useState({
@@ -42,7 +43,9 @@ export default function ProductInfo({ product }: { product: any }) {
       <h1 className="text-2xl font-semibold">{product.title}</h1>
       <p className="text-sm text-gray-500">⭐ {product.reviews} Reviews</p>
       <p className="text-green-700 mt-1">{product.exclusive_offer}</p>
-
+      <div className="md:hidden block">
+        <ProductImageGallery images={product.images} />
+      </div>
       <VariationSelector
         variations={product.variations}
         selected={selected}

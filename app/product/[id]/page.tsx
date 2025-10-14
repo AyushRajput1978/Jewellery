@@ -39,7 +39,10 @@ export default async function ProductPage({
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="flex flex-col gap-6 md:block hidden">
+
       <ProductGallery images={product.images} />
+      </div>
       <div className="flex flex-col gap-6">
         <ProductInfo product={product} />    
       </div>
