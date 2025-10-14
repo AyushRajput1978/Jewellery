@@ -1,50 +1,51 @@
 "use client";
-import { useState, useMemo } from "react";
-import { calculateTotalPrice } from "@/lib/pricing";
+import clsx from "clsx";
 
-export default function VariationSelector({
-  variations,
-  basePrice,
-}: {
-  variations: any;
-  basePrice: number;
-}) {
-  const [selected, setSelected] = useState({
-    gemstone: "Aquamarine",
-    quality: "Good",
-    metal: "White Gold",
-    carat_weight: 1.5,
-    ring_size: 7,
-  });
+interface Props {
+  variations: Record<string, string[] | number[]>;
+  selected: any;
+  onSelect: (s: any) => void;
+  total: number;
+}
 
-  const total = useMemo(
-    () => calculateTotalPrice(basePrice, selected),
-    [selected]
-  );
+export default function VariationSelector({ variations, selected, onSelect, total }: Props) {
 
-  const handleChange = (type: string, value: any) =>
-    setSelected((prev) => ({ ...prev, [type]: value }));
+  const handleSelect = (type: string, value: string | number) => {
+    onSelect({ ...selected, [type]: value });
+  };
 
   return (
-    <div className="space-y-4 mt-4">
+    <div className="space-y-6 mt-6">
       {Object.entries(variations).map(([type, options]) => (
         <div key={type}>
-          <p className="capitalize font-medium mb-1">
-            {type.replace("_", " ")}
-          </p>
-          <select
-            onChange={(e) => handleChange(type, e.target.value)}
-            className="border p-2 rounded-md w-full"
-          >
-            {(options as any[]).map((o) => (
-              <option key={o}>{o}</option>
-            ))}
-          </select>
+          <p className="capitalize font-medium mb-2">{type.replace("_", " ")}</p>
+          <div className="flex flex-wrap gap-2">
+            {(options as (string | number)[]).map((option) => {
+              const isActive = selected[type as keyof typeof selected] === option;
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => handleSelect(type, option)}
+                  className={clsx(
+                    "px-4 py-2 rounded-lg border transition-all duration-200",
+                    isActive
+                      ? "bg-black text-white border-black"
+                      : "bg-white text-gray-700 border-gray-300 hover:border-black"
+                  )}
+                >
+                  {option}
+                </button>
+              );
+            })}
+          </div>
         </div>
       ))}
 
-      <div className="pt-3 border-t">
-        <p className="text-xl font-bold">Total: ₹{total}</p>
+      <div className="pt-4 border-t">
+        <p className="text-xl font-bold">
+         Total: <span className="text-green-700">₹{total.toLocaleString("en-IN")}</span>
+        </p>
       </div>
     </div>
   );

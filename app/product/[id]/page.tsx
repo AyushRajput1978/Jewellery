@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import ProductGallery from "@/components/ProductGallery";
 import ProductInfo from "@/components/ProductInfo";
-import PriceBreakdown from "@/components/PriceBreakdown";
 import RelatedProducts from "@/components/RelatedProducts";
 
 async function getProduct(id: string) {
@@ -42,8 +41,7 @@ export default async function ProductPage({
     <main className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-10">
       <ProductGallery images={product.images} />
       <div className="flex flex-col gap-6">
-        <ProductInfo product={product} />
-        <PriceBreakdown breakdown={product.price_breakdown} />
+        <ProductInfo product={product} />    
       </div>
       <div className="col-span-2 mt-12">
         <RelatedProducts />

@@ -1,32 +1,48 @@
 "use client";
+import React, { useState } from "react";
 import Image from "next/image";
-import { useState } from "react";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+interface ProductImageGalleryProps {
+  images: string[]; 
+  selectedVariationImage?: string; 
+}
 
-export default function ProductGallery({ images }: { images: string[] }) {
-  const [main, setMain] = useState(images[0]);
+export default function ProductImageGallery({ images, selectedVariationImage }: ProductImageGalleryProps) {
+  const [mainImage, setMainImage] = useState(selectedVariationImage || images[0]);
+
+  // Update main image when variation changes
+  React.useEffect(() => {
+    if (selectedVariationImage) setMainImage(selectedVariationImage);
+  }, [selectedVariationImage]);
 
   return (
-    <section>
-      <div className="border rounded-2xl overflow-hidden relative">
-        <Image
-          src={main}
-          alt="Product main image"
-          width={500}
-          height={500}
-          className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
-        />
-      </div>
-      <div className="flex gap-3 mt-3">
-        {images.map((img) => (
-          <button
+    <div>
+       <Zoom>
+        <div className="relative aspect-square w-full overflow-hidden rounded-xl border bg-white">
+          <Image
+            src={mainImage}
+            alt="Product image"
+            width={600}
+            height={600}
+            className="object-contain w-full h-full cursor-zoom-in transition-transform duration-300 hover:scale-105"
+            priority
+          />
+        </div>
+      </Zoom>
+      <div className="flex gap-2 mt-4">
+        {images.map((img, idx) => (
+          <Image
             key={img}
-            onClick={() => setMain(img)}
-            className="border rounded-lg p-1"
-          >
-            <Image src={img} alt="Thumbnail" width={80} height={80} />
-          </button>
+            src={img}
+            width={80}
+            height={64}
+            alt={`Thumbnail ${idx + 1}`}
+            className={` object-cover border rounded cursor-pointer ${mainImage === img ? "ring-2 ring-blue-500" : ""}`}
+            onClick={() => setMainImage(img)}
+          />
         ))}
       </div>
-    </section>
+    </div>
   );
 }
