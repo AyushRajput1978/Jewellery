@@ -4,6 +4,7 @@ import VariationSelector from "./VariationSelector";
 import PriceBreakdown from "./PriceBreakdown";
 import AddToBagButton from "./AddToBagButton";
 import { calculateUnifiedPricing } from "@/lib/pricing";
+import { checkAvailability } from "@/lib/availability";
 
 export default function ProductInfo({ product }: { product: any }) {
   const [selected, setSelected] = useState({
@@ -24,6 +25,18 @@ export default function ProductInfo({ product }: { product: any }) {
     [selected, product]
   );
 
+  // Check availability for current selection
+  const availabilityResult = useMemo(() => {
+    if (product.availability) {
+      return checkAvailability(selected, product.availability);
+    }
+    return {
+      status: "in_stock" as const,
+      message: "In stock - ready to ship",
+      isAvailable: true,
+    };
+  }, [selected, product.availability]);
+
   return (
     <section>
       <h1 className="text-2xl font-semibold">{product.title}</h1>
@@ -35,10 +48,15 @@ export default function ProductInfo({ product }: { product: any }) {
         selected={selected}
         onSelect={setSelected}
         total={total}
+        availability={product.availability}
+        availabilityStatus={{
+          status: availabilityResult.status,
+          message: availabilityResult.message,
+        }}
       />
 
       <PriceBreakdown breakdown={breakdown} total={total} />
-      <AddToBagButton />
+      <AddToBagButton disabled={!availabilityResult.isAvailable} />
     </section>
   );
 }

@@ -25,5 +25,64 @@
       { "type": "Diamond", "carat": 0.46, "value": 143175 }
     ],
     "making_charges": 6218
+  },
+  "availability": {
+    "rules": [
+      {
+        "combination": { "gemstone": "Diamond", "quality": "Heirloom", "ring_size": 10 },
+        "status": "out_of_stock",
+        "message": "This combination is currently out of stock"
+      },
+      {
+        "combination": { "gemstone": "Diamond", "quality": "Heirloom", "ring_size": 9 },
+        "status": "backorder",
+        "message": "Available on backorder (2-3 weeks)"
+      },
+      {
+        "combination": { "gemstone": "Sapphire", "quality": "Best", "ring_size": 10 },
+        "status": "out_of_stock",
+        "message": "This combination is currently out of stock"
+      },
+      {
+        "combination": { "gemstone": "Sapphire", "quality": "Heirloom" },
+        "status": "backorder",
+        "message": "Available on backorder (3-4 weeks)"
+      },
+      {
+        "combination": { "quality": "Heirloom", "carat_weight": 2.0 },
+        "status": "backorder",
+        "message": "Available on backorder (2-3 weeks)"
+      }
+    ],
+    "stock_levels": {
+      "gemstone": {
+        "Diamond": { "in_stock": true, "backorder_days": 14 },
+        "Sapphire": { "in_stock": true, "backorder_days": 21 },
+        "Aquamarine": { "in_stock": true, "backorder_days": 0 }
+      },
+      "quality": {
+        "Heirloom": { "in_stock": true, "backorder_days": 14 },
+        "Best": { "in_stock": true, "backorder_days": 7 },
+        "Better": { "in_stock": true, "backorder_days": 0 },
+        "Good": { "in_stock": true, "backorder_days": 0 }
+      },
+      "metal": {
+        "White Gold": { "in_stock": true, "backorder_days": 0 },
+        "Yellow Gold": { "in_stock": true, "backorder_days": 0 },
+        "Rose Gold": { "in_stock": true, "backorder_days": 7 }
+      },
+      "carat_weight": {
+        "1.5": { "in_stock": true, "backorder_days": 0 },
+        "1.8": { "in_stock": true, "backorder_days": 7 },
+        "2.0": { "in_stock": true, "backorder_days": 14 }
+      },
+      "ring_size": {
+        "6": { "in_stock": true, "backorder_days": 0 },
+        "7": { "in_stock": true, "backorder_days": 0 },
+        "8": { "in_stock": true, "backorder_days": 0 },
+        "9": { "in_stock": true, "backorder_days": 7 },
+        "10": { "in_stock": false, "backorder_days": 14 }
+      }
+    }
   }
 }
