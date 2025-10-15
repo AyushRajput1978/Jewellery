@@ -2,19 +2,20 @@ import { Metadata } from "next";
 import ProductGallery from "@/components/ProductGallery";
 import ProductInfo from "@/components/ProductInfo";
 import RelatedProducts from "@/components/RelatedProducts";
+import product from "../../../data/Product.json";
 
-async function getProduct(id: string) {
-  const res = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-    }/api/product/${id}`,
-    {
-      cache: "no-store",
-    }
-  );
-  if (!res.ok) throw new Error("Failed to load product");
-  return res.json();
-}
+// async function getProduct(id: string) {
+//   const res = await fetch(
+//     `${
+//       process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+//     }/api/product/${id}`,
+//     {
+//       cache: "no-store",
+//     }
+//   );
+//   if (!res.ok) throw new Error("Failed to load product");
+//   return res.json();
+// }
 
 export async function generateMetadata({
   params,
@@ -22,7 +23,8 @@ export async function generateMetadata({
   params: { id: string };
 }): Promise<Metadata> {
   const awaitedParams = await params;
-  const p = await getProduct(awaitedParams.id);
+  // const p = await getProduct(awaitedParams.id);
+  const p = product;
   return {
     title: `${p.title} | Jewelry Store`,
     description: `Buy ${p.title} at the best price`,
@@ -35,16 +37,15 @@ export default async function ProductPage({
   params: { id: string };
 }) {
   const awaitedParams = await params;
-  const product = await getProduct(awaitedParams.id);
+  // const product = await getProduct(awaitedParams.id);
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-10">
       <div className="flex flex-col gap-6 md:block hidden">
-
-      <ProductGallery images={product.images} />
+        <ProductGallery images={product.images} />
       </div>
       <div className="flex flex-col gap-6">
-        <ProductInfo product={product} />    
+        <ProductInfo product={product} />
       </div>
       <div className="col-span-2 mt-12">
         <RelatedProducts />
