@@ -17,7 +17,7 @@ export default function RelatedProducts() {
             className="min-w-[180px] bg-white p-3 rounded-lg shadow-sm"
           >
             <Image
-              src={`https://via.placeholder.com/150?text=${p.name}`}
+              src={`https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png`}
               alt={p.name}
               width={150}
               height={150}
